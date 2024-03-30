@@ -11,13 +11,9 @@ const addbio = new GenerateCkEditor();
 const textareaElement1 = addbio.create(sourceID1, labelText1);
 $("#authorbiocontainer").html(textareaElement1);
 addbio.initEditor(sourceID1);
-// $("#DesignationID").tagEditor({
-//   delimiter: "" /* space and comma */,
-//   forceLowercase: false,
-// });:
 
 $("#intrestID").tagEditor({
-  delimiter: "" /* space and comma */,
+  delimiter: "",
   forceLowercase: false,
 });
 
@@ -58,13 +54,13 @@ function getData() {
             let intrestElem = "";
             if (editor && editor.intrest && editor.intrest.length) {
               // editor.designation.forEach(item => designationElem += `${item}, `);
-              intrestElem = editor.intrest.join();
+              intrestElem = editor.intrest.join("");
             } else {
               intrestElem = "NA";
             }
             let websiteInputElem = "";
-            if (editor && editor.websiteInput) {
-              websiteInputElem = editor.websiteInput;
+            if (editor && editor.website) {
+              websiteInputElem = editor.website;
             } else {
               websiteInputElem = "NA";
             }
@@ -85,10 +81,10 @@ function getData() {
                                             <p class="mb-0 fs-3">${designationElem}</p>
                                         </td>
                                         <td>
-                                        <p class="mb-0 fs-3">${intrestElem}</p>
+                                        <p class="mb-0 fs-3 text-ellipses-100" title="${intrestElem}">${intrestElem}</p>
                                     </td>
                                     <td>
-                                    <p class="mb-0 fs-3">${websiteInputElem}</p>
+                                    <p class="mb-0 fs-3 text-ellipses-100" title="${websiteInputElem}">${websiteInputElem}</p>
                                 </td>
                                         <td>
                                             <span style="cursor: pointer;" class="badge fw-semibold p-2 bg-light-primary text-primary" onclick="showEditorModalPopup('${editor._id}')"><i class="fa-solid fa-pen-to-square"></i> Modify</span>
@@ -110,7 +106,7 @@ function showEditorModalPopup(editorID) {
   );
   $("#modifyEditorID").attr("editorid", editorData._id);
   $(".modal-title").text(editorData.name);
-  $("#websiteInput").text(editorData.website);
+  $("#websiteInput").val(editorData.website);
   $("#authorName").val(editorData.name);
   $("#afflication").val(editorData.affiliation);
   $("#DesignationID").val(editorData.designation || "");
@@ -178,16 +174,6 @@ function saveData() {
         designation: designationsList,
         intrest: intrestList,
       };
-      // const formData = new FormData();
-      // if (imageInput.files.length > 0) {
-      //     const imageFile = imageInput.files[0];
-      //     formData.append('files', imageFile);
-      // }
-      // formData.append("name", author);
-      // formData.append("affiliation", afflication);
-      // formData.append("biography", bio);
-      // formData.append("description", "A description...");
-      // formData.append("keywords", JSON.stringify(["keyword1", "keyword2"]));
 
       fetch("/editorialboardupdate", {
         method: "POST",
@@ -212,6 +198,7 @@ function saveData() {
             $(".validationalert").addClass("d-none alert-danger");
           }, 3000);
           getData();
+          $("#editordetailsModalID").modal('hide');
           console.log(responseData);
         })
         .catch((error) => {
@@ -250,6 +237,24 @@ function searchData() {
           if (editorslist.length) {
             let editortrelem = "";
             editorslist.forEach((editor) => {
+              let designationElem = "";
+              if (editor && editor.designation) {
+                designationElem = editor.designation;
+              } else {
+                designationElem = "NA";
+              }
+              let intrestElem = "";
+              if (editor && editor.intrest && editor.intrest.length) {
+                intrestElem = editor.intrest.join("");
+              } else {
+                intrestElem = "NA";
+              }
+              let websiteInputElem = "";
+              if (editor && editor.website) {
+                websiteInputElem = editor.website;
+              } else {
+                websiteInputElem = "NA";
+              }
               editortrelem += `<tr>
                                         <td class="ps-0">
                                             <div class="d-flex align-items-center">
@@ -263,14 +268,20 @@ function searchData() {
                                             </div>
                                         </td>
                                         <td>
-                                            <p class="mb-0 fs-3">${editor.designation}</p>
+                                            <p class="mb-0 fs-3">${designationElem}</p>
                                         </td>
                                         <td>
-                                            <p class="mb-0 fs-3">${editor.affiliation}</p>
-                                        </td>
+                                        <p class="mb-0 fs-3 text-ellipses-100" title="${intrestElem}">${intrestElem}</p>
+                                    </td>
+                                    <td>
+                                    <p class="mb-0 fs-3 text-ellipses-100" title="${websiteInputElem}">${websiteInputElem}</p>
+                                </td>
                                         <td>
                                             <span style="cursor: pointer;" class="badge fw-semibold p-2 bg-light-primary text-primary" onclick="showEditorModalPopup('${editor._id}')"><i class="fa-solid fa-pen-to-square"></i> Modify</span>
                                         </td>
+                                        <td>
+                                        <button class="btn btn-danger" onclick="deleteEditor('${editor._id}')">Delete</button>
+                                    </td>
                                     </tr>`;
             });
             $("#editordatacontaierID").html(editortrelem);
@@ -290,7 +301,6 @@ function deleteEditor(editorID) {
       editorID: editorID,
     };
     fetch("/deleteEditor", {
-      
       method: "POST",
       headers: {
         "Content-Type": "application/json",

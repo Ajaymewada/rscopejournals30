@@ -32,22 +32,6 @@ const journalSchema = new Schema({
         type: Boolean,
         default: true
     },
-    // CoverBanner: {
-    //     type: {
-    //         filename: {
-    //             type: String,
-    //             required: true,
-    //         },
-    //         path: {
-    //             type: String,
-    //             required: true,
-    //         },
-    //         uploadDate: {
-    //             type: Date,
-    //             default: Date.now,
-    //         },
-    //     }
-    // },
     metadata: {
         type: {
             title: String,

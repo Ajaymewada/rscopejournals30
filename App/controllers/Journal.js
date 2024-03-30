@@ -1,3 +1,4 @@
+const { default: mongoose } = require("mongoose");
 const Journal = require("../Modals/Journal");
 
 // Function to save a new journal
@@ -97,4 +98,91 @@ async function getAllJournals(req, res) {
   }
 }
 
-module.exports = { saveJournal, findJournalById, getAllJournals };
+async function updateJournal(req, res) {
+  try {
+    const journalId = req.body.journalId;
+
+    const updateData = {
+      MainCategory: req.body.MainCategory,
+      ISSNNumber: req.body.ISSNNumber,
+      ImpactFactorValue: req.body.ImpactFactorValue,
+      NLMCode: req.body.NLMCode,
+      About: req.body.About,
+      isActive: req.body.isActive,
+    };
+
+    const updatedJournal = await Journal.findOneAndUpdate(
+      { _id: new mongoose.Types.ObjectId(journalId) },
+      { $set: updateData },
+      { new: true }
+    );
+
+    res.status(200).json({
+      message: "Journal updated successfully",
+      journal: updatedJournal,
+    });
+  } catch (error) {
+    res.status(200).json({
+      message: "An error occurred while updating the journal",
+      error: error.message,
+    });
+  }
+}
+
+async function updateJournalStatus(req, res) {
+  try {
+    const journalId = req.body.journalId;
+
+    const updateData = {
+      isActive: req.body.isActive,
+    };
+
+    const updatedJournal = await Journal.findOneAndUpdate(
+      { _id: new mongoose.Types.ObjectId(journalId) },
+      { $set: updateData },
+      { new: true }
+    );
+
+    res.status(200).json({
+      message: "Journal updated successfully",
+      journal: updatedJournal,
+    });
+  } catch (error) {
+    res.status(200).json({
+      message: "An error occurred while updating the journal",
+      error: error.message,
+    });
+  }
+}
+
+async function searchJournal(req, res) {
+  Journal.find(
+    {
+      JournalName: { $regex: new RegExp(req.body.JournalName, "i") },
+    },
+    (err, doc) => {
+      if (err) {
+        res.status(500).json({
+          msg: "No Data",
+          status: false,
+          data: {},
+        });
+      } else {
+        res.status(200).json({
+          msg: "Data Found!",
+          status: true,
+          data: doc,
+        });
+      }
+    }
+  );
+}
+
+module.exports = {
+  saveJournal,
+  findJournalById,
+  getAllJournals,
+  updateJournal,
+  updateJournalStatus,
+  searchJournal,
+};
