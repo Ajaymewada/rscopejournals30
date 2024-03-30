@@ -33,7 +33,19 @@
     <!-- Site Stylesheet -->
     <link rel="stylesheet" href="../assetstwo/css/app.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <style>
+        @media only screen and (max-width: 320px) {
+            .background {
+                width: 280px;
+                margin-left: -15px;
+            }
 
+            .row_1 {
+
+                margin-right: -22px;
+            }
+        }
+    </style>
 </head>
 
 <body class="sticky-header">
@@ -115,89 +127,22 @@
                                                 </h1>
                                                 <div class="row mt-5">
 
-                                                    <diV class="flex_1 ">
-                                                        <div id="editorial_board_Container">
-                                                            
+                                                    <diV class="flex_1">
+                                                        <div id="editorial_board_Container" class="row_1">
+
                                                         </div>
                                                     </diV>
 
-
-
-                                                    <!-- <div class="flex_2">
+                                                    <div class="flex_2">
                                                         <div class="background">
-                                                            <h1 class="title">
-                                                                <a style="
-                                                                font-size: 18px;
-                                                                margin-top: 10px;
-                                                                padding-left: 30px;
-                                                                margin-bottom: -100px;
-                                                              ">Latest Articles</a>
+                                                            <h1 class="title"><a
+                                                                    style="font-size:18px; margin-top: 10px;padding-left: 30px;margin-bottom: -100px;">Latest
+                                                                    Articles</a>
                                                             </h1>
-                                                            <div id="rightSideNavContainer">
-                                                                <div class="col-lg-12">
-                                                                    <div class="row">
-                                                                        <div class="inner">
-                                                                            <div class="content"
-                                                                                style="margin-top:-15px;">
-                                                                                <div>
-                                                                                    <h6 class="title">
-                                                                                    </h6>
-                                                                                    <div
-                                                                                        style="border-bottom: 2px solid #e0e0e0; width:80%;margin-bottom:15px;">
-                                                                                    </div>
-
-                                                                                </div>
-                                                                                <p class="title">
-                                                                                    <a title="Acoustics"
-                                                                                        class="cursor-pointer"
-                                                                                        onclick="increaseViews('65fae5b9a02185737d96d947')"
-                                                                                        style="font-size:16px;">Acoustics</a>
-                                                                                </p>
-                                                                                <p style="margin-bottom: 5px;">
-
-                                                                                </p>
-                                                                                <p class="course-meta mt-3">
-                                                                                    <strong
-                                                                                        style="margin-right:5px;font-weight:200;font-size:13px;">Author
-                                                                                        :</strong>
-
-                                                                                    <span style="color: #F07317; margin-right: 5px;font-size: 12px;
-                                          font-weight: 600;">
-                                                                                        <i class="fa-regular fa-user"
-                                                                                            style="color: black; padding: 0px; font-size: 10px; border-radius: 50px; margin-right: 3px;"></i>
-                                                                                        test
-                                                                                    </span>
-                                                                                </p>
-                                                                                <p></p>
-                                                                                <div class="course-rating">
-                                                                                    <span class="rating-count"></span>
-                                                                                </div>
-                                                                                <p class=""
-                                                                                    style="color: gray; font-size: 10px!important;">
-                                                                                    Foods 2024, 13(1), 151;
-                                                                                    https://doi.org/10.3390/foods13010151
-                                                                                    (registering DOI) - Mar 12, 1999
-                                                                                </p>
-
-                                                                                <a class="doi"
-                                                                                    style="font-size: 10px;">doi:
-                                                                                    10.3389/fnagi.2023.1340706</a>
-
-                                                                                <ul class="course-meta"
-                                                                                    style="margin-top: 0px;">
-                                                                                    <li><span
-                                                                                            class="date orange course-price1"
-                                                                                            style="font-size: 10px;">Published
-                                                                                            on Mar 12, 1999</span></li>
-
-                                                                                </ul>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+                                                            <div id="rightSideNavContainer"></div>
                                                         </div>
-                                                    </div> -->
+                                                    </div>
+
 
 
 
@@ -324,7 +269,7 @@
 
         <!-- Your custom scripts -->
         <script src="../assetstwo/js/maineditorialboard.js"></script>
-        <!-- <script src="../assetstwo/js/mainCurrentIssue.js"></script> -->
+        <script src="../assetstwo/js/mainCurrentIssue.js"></script>
         <script>
             // Add an event listener for each menu item
             document.getElementById('journalMenu').addEventListener('click', function () {
@@ -380,9 +325,13 @@
 
 
 
+        <script>
 
+            function closeBiographyModel() {
+                $('#editorBiography').modal('hide'); // Replace 'yourModalId' with the actual ID of your modal
+            }
 
-        <!-- Site Scripts -->
+        </script>
         <script src="../assetstwo/js/app.js"></script>
 </body>
 

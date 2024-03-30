@@ -31,7 +31,7 @@ function getAllInPressArticles() {
                         articleHTML += `
                             <div class="col-lg-12 mb-5">
                                 <div class="row">
-                                    <div class="edu-course course-style-4 course-style-14 shadow" style="width: 100%; box-sizing: border-box;">
+                                    <div class="edu-course course-style-4 course-style-14" style="width: 100%; box-sizing: border-box;">
                                         <div class="inner">
                                             <div class="content">
                                                 <div style="position: relative;">
