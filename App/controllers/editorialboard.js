@@ -7,18 +7,22 @@ async function saveEditorialBoard(req, res) {
     if (editorialBoardData && editorialBoardData.keywords) {
       editorialBoardData.keywords = JSON.parse(editorialBoardData.keywords);
     }
-    // if (editorialBoardData && editorialBoardData.designation) {
-    //     editorialBoardData.designation = JSON.parse(editorialBoardData.designation)
-    // }
     if (editorialBoardData && editorialBoardData.intrest) {
       editorialBoardData.intrest = JSON.parse(editorialBoardData.intrest);
     }
     if (editorialBoardData.journalid) {
       editorialBoardData.journalid = mongoose.Types.ObjectId(editorialBoardData.journalid);
     }
-    if (req.file) {
+    if (req.file && req.uniqueIdentifier) {
+      const filename = 'Editorial-Board-Rscope-' + req.uniqueIdentifier + '-' + req.file.originalname;
+      editorialBoardData.image = `editorsImages/${filename}`;
+    } else {
+      return res
+      .status(200)
+      .json({
+        message: "An error occurred while creating the editorial board",
+      });
     }
-    editorialBoardData.image = `editorsImages/${req.file.filename}`;
     const editorialBoard = await new EditorialBoard(editorialBoardData);
     await editorialBoard.save();
     res

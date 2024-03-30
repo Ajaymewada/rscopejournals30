@@ -12,6 +12,7 @@ var articletypes = require('../../App/controllers/articleTypesController.js')
 var peerreview = require('../../App/controllers/peerreviewController.js')
 
 const multer = require('multer');
+const { v4: uuidv4 } = require('uuid');
 var authMiddleware = require('../../App/middleware/auth')
 const BlacklistedToken = require("../../App/Modals/blacklistedToken");
 const addForAuthors = require("../../App/controllers/addForAuthors");
@@ -191,7 +192,10 @@ const storage2 = multer.diskStorage({
         cb(null, './Public/editorsImages/')
     },
     filename: function (req, file, cb) {
-        cb(null, file.originalname)
+        const uniqueIdentifier = uuidv4();
+        const filename = 'Editorial-Board-Rscope-' + uniqueIdentifier + '-' + file.originalname;
+        req.uniqueIdentifier = uniqueIdentifier;
+        cb(null, filename)
     }
 })
 
