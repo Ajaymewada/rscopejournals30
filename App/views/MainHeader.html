@@ -1,0 +1,124 @@
+{% block MainHeader %}
+<header class="edu-header header-style-1 header-fullwidth no-topbar">
+    <div id="edu-sticky-placeholder"></div>
+    <div class="header-mainmenu">
+        <div class="container-fluid">
+            <div class="header-navbar">
+                <div class="header-brand ml-3">
+                    <div class="logo">
+                        <a href="#" onclick="dynamicnavigationHeader()">
+                            <img class="logo-light" src="../assetstwo/images/logo/logo-dark.png" alt="Corporate Logo">
+                            <img class="logo-dark" src="../assetstwo/images/logo/logo-white.png" alt="Corporate Logo">
+                        </a>
+                    </div>
+                </div>
+                <div class="header-mainnav">
+                    <nav class="mainmenu-nav">
+                        <ul class="mainmenu">
+                            <li><a href="https://rscope.org/journals" target="_blank">All Journals</a></li>
+                            <li><a href="https://rscope.org/journals" target="_blank">All Articles</a></li>
+                            <li><a href="https://rscope.org" target="_blank">About us</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="header-right mr-3">
+                    <ul class="header-action">
+                        <li class="header-btn">
+                            <a href="https://rems.rscope.org/" style="color: black;
+                            width: 210px;
+                            border-style: solid;
+                            border-width: 2px;
+                            padding: 15px;
+                            border-radius: 15px;
+                            font-size: 13px;
+                            border-color: #e77821;
+                            font-weight: 500;">Submit your research<i class="icon-4" style="margin-left:10px;padding-right:-30px;"></i></a>
+                        </li>
+                        <li class="mobile-menu-bar d-block d-xl-none">
+                            <button class="hamberger-button">
+                                <i class="icon-54"></i>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="popup-mobile-menu">
+        <div class="inner">
+            <div class="header-top">
+                <div class="logo">
+                    <a href="#">
+                        <img class="logo-light" src="../assetstwo/images/logo/logo-dark.png" alt="Corporate Logo" style="height: 30px;">
+                        <img class="logo-dark" src="../assetstwo/images/logo/logo-white.png" alt="Corporate Logo">
+                    </a>
+                </div>
+                <div class="close-menu">
+                    <button class="close-button">
+                        <i class="icon-73"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="content p-5" style="background-color: #fff;">
+                <h5 class="widget-title active" id="journalMenu">Journal Menu <i class="fa-solid fa-caret-down ml-3"></i></h5>
+                <ul class="category-list pl-5" style="font-size: 13px; list-style-type: none; margin-left: -30px; padding-left: 15px;color:white;width: 100%;background-color: #fff;">
+                    <li onclick="dynamicnavigation('aims-and-scope')"><a href="#" class="color">Aims & Scope</a></li>
+                    <li onclick="dynamicnavigation('editorial-board')"><a href="#" class="color">Editorial Board</a></li>
+                    <!-- <li><a href="/author-guide" class="color">Instructions for Authors</a></li>
+                    <li><a href="/article-processing-fee" class="color">Article Processing Charge</a></li> -->
+                    <!-- <li><a href="/editorial-office" class="color">Contact Us</a></li> -->
+                    <li><a href="#" class="color">Contact Us</a></li>
+                </ul>
+
+                <h5 class="widget-title" id="Usefullinks">Useful links <i class="fa-solid fa-caret-down ml-3"></i></h5>
+                <ul class="category-list u pl-5" style="font-size: 13px; list-style-type: none; margin-left: -30px; padding-left: 15px;color:white;width: 100%;background-color: #fff;">
+                    <li onclick="dynamicnavigation('peer_review')"><a href="#" class="color">Peer Review</a></li>
+                    <li onclick="dynamicnavigation('for-editors')"><a href="#" class="color">For Editors</a></li>
+                    <li onclick="dynamicnavigation('why-submit')"><a href="#" class="color">Why Submit ?</a></li>
+                    <li onclick="dynamicnavigation('submissionchecklist')"><a href="#" class="color">Submission Checklist</a></li>
+                    <li onclick="dynamicnavigation('article-types')"><a href="#" class="color">Artical Types</a></li>
+                    <li onclick="dynamicnavigation('author-instructions')"><a href="#" class="color">Instructions for Authors</a></li>
+                    <li onclick="dynamicnavigation('article-processing-fee')"><a href="#" class="color">Article Processing Fee</a></li>
+
+                </ul>
+
+                <h5 class="widget-title" id="Articles">Articles <i class="fa-solid fa-caret-down ml-3"></i></h5>
+                <ul class="category-list a pl-5" style="font-size: 13px; list-style-type: none; margin-left: -30px;padding-left: 15px;width: 100%;background-color: #fff;">
+                    <li><a href="/current-issue" class="color">Current Issue</a></li>
+                    <li><a href="/all-issues" class="color">All Issues</a></li>
+                    <li><a href="#" class="color">Special Issues</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Start Search Popup  -->    
+    <div class="edu-search-popup">
+        <div class="content-wrap">
+            <div class="site-logo">
+                <img class="logo-light" src="../assetstwo/images/logo/logo-dark.png" alt="Corporate Logo">
+                <img class="logo-dark" src="../assetstwo/images/logo/logo-white.png" alt="Corporate Logo">
+            </div>
+            <div class="close-button">
+                <button class="close-trigger"><i class="icon-73"></i></button>
+            </div>
+            <div class="inner">
+                <form class="search-form" action="#">
+                    <input type="text" class="edublink-search-popup-field" placeholder="Search Here...">
+                    <button class="submit-button"><i class="icon-2"></i></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</header>
+<script>
+    function dynamicnavigationHeader() {
+      let JournalInfo = JSON.parse(localStorage.getItem("JournalInfo"));
+      if (JournalInfo && JournalInfo.JournalSlug) {
+        window.location.href = `/${JournalInfo.JournalSlug}`;
+      }
+    }
+  </script>
+{% endblock %}
