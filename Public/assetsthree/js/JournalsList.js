@@ -15,6 +15,7 @@ function getAllJournals() {
         .then(async data => {
             if (data && data.status && data.data && data.data.length) {
                 let Journals = data.data;
+                Journals = await Journals.filter(item => item.isActive);
                 displayJournals(Journals);
             }
         })

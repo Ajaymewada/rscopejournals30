@@ -7838,7 +7838,7 @@ only screen and (max-width:1199px) {
     justify-content: flex-start;
     height: auto;
     width: auto;
-    min-width: 84px
+    min-width:34px !important;
 }
 
 .categorie-grid.categorie-style-2 .icon .art-design {
