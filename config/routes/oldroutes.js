@@ -90,13 +90,13 @@ router.get('/articletypes', authMiddleware, function (req, res) {
 //     res.render('Main-AimsScope');
 // })
 
-router.get('/current-issue', function (req, res) {
-    res.render('mainCurrentIssue');
-})
+// router.get('/current-issue', function (req, res) {
+//     res.render('mainCurrentIssue');
+// })
 
-router.get('/all-issues', function (req, res) {
-    res.render('MainAllIssues');
-})
+// router.get('/all-issues', function (req, res) {
+//     res.render('MainAllIssues');
+// })
 
 router.get('/articlepage', function (req, res) {
     res.render('MainArticlePage');
