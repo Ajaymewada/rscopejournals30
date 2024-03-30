@@ -24,67 +24,73 @@ function ckEditorInitiator() {
   $("#contactusArea").html(textareaElement1);
   $("#descriptionArea").html(textareaElement2);
 
-  // Initialize CKEditor on the created textarea
   contactus.initEditor(sourceID1);
   description.initEditor(sourceID2);
 }
 
-$(() => {
- 
+$(async () => {
   $("#TagsID").tagEditor({
-    delimiter: "" ,
+    delimiter: "",
     forceLowercase: false,
     initialTags: [],
   });
+  await ckEditorInitiator();
+  getAllJournals();
 });
 
-
-
-$(() => {
-  getData();
-})
-function getData() {
-  const url = '/getContactInformation';
-  const requestOptions = {
-      method: 'GET',
+$("#journalSelect").on("change", () => {
+  let journalid = document.getElementById("journalSelect").value;
+  if (journalid) {
+    const url = `/getEditorialOfficeByJournalId/${journalid}`;
+    const requestOptions = {
+      method: "GET",
       headers: {
-          'Content-Type': 'application/json'
-      }
-  };
-  fetch(url, requestOptions)
-      .then(response => response.json())
-      .then(async data => {
-          console.log(data)
-          if (data && data !== null) {
-              await ckEditorInitiator();
-              const { keywords, contactDetails, metatitle} = data.data;
-              if(metatitle) {
-                  $("#metaTitleID").val(metatitle);
-              }
-             
-              contactus.setValue(sourceID1, contactDetails || "");
-              description.setValue(sourceID2, data.data.description || "");
-              if (keywords && Array.isArray(keywords) && keywords.length) {
-                  $('#TagsID').tagEditor('destroy');
-                  $('#TagsID').tagEditor({
-                      delimiter: '', 
-                      forceLowercase: false,
-                      initialTags: keywords
-                  });
-              }
-          } else {
-              await ckEditorInitiator();
+        "Content-Type": "application/json",
+      },
+    };
+    fetch(url, requestOptions)
+      .then((response) => response.json())
+      .then(async (data) => {
+        if (data && data.status) {
+          const { contactDetails, keywords, metatitle } = data.data[0];
+          if (metatitle) {
+            $("#metaTitleID").val(metatitle);
           }
-      })
-}
+          contactus.setValue(sourceID1, contactDetails || "");
+          description.setValue(sourceID2, data.data[0].description || "");
+          if (keywords && Array.isArray(keywords) && keywords.length) {
+            $("#TagsID").tagEditor("destroy");
+            $("#TagsID").tagEditor({
+              delimiter: "",
+              forceLowercase: false,
+              initialTags: keywords,
+            });
+          }
+        } else {
+          contactus.setValue(sourceID1, "");
+          description.setValue(sourceID2, "");
+          $("#TagsID").tagEditor("destroy");
+          $("#TagsID").val("");
+          $("#TagsID").tagEditor({
+            delimiter: "",
+            forceLowercase: false,
+          });
+          $("#journalSelect").val("");
+          $("#metaTitleID").val("");
+        }
+        console.log(data);
+      });
+  }
+});
 
 function saveData() {
   // Create an object with the data you want to send in the request body
   let name = contactus.getData(sourceID1);
-  
+
   let description1 = description.getData(sourceID2);
   let keywords = $("#TagsID").tagEditor("getTags")[0].tags;
   let metatitle = $("#metaTitleID").val();
+  let journalid = document.getElementById("journalSelect").value;
   if (name == null || name == "") {
     $(".validationalert").removeClass("d-none");
     $(".validationalert").text("Enter For contact Details");
@@ -99,18 +105,22 @@ function saveData() {
     $(".validationalert").removeClass("d-none");
     $(".validationalert").text("Enter Keywords");
     return;
-  } else if (metatitle == null || metatitle == ""){
-    $(".validationalert").removeClass('d-none')
+  } else if (metatitle == null || metatitle == "") {
+    $(".validationalert").removeClass("d-none");
     $(".validationalert").text("Enter Keywords");
     return;
-  }else {
+  } else if (journalid === null || journalid === "") {
+    $(".validationalert").removeClass("d-none");
+    $(".validationalert").text("Select a Journal");
+    return;
+  } else {
     $(".validationalert").addClass("d-none");
-    // console.log(name, description1, keywords)
     const data = {
       name: name,
       description: description1,
       keywords: keywords,
-      metatitle
+      metatitle,
+      journalid: journalid,
     };
     fetch("/addContactInformation", {
       method: "POST",
@@ -135,6 +145,16 @@ function saveData() {
           $(".validationalert").removeClass("alert-success");
           $(".validationalert").addClass("d-none alert-danger");
         }, 3000);
+        contactus.setValue(sourceID1, "");
+        description.setValue(sourceID2, "");
+        $("#TagsID").tagEditor("destroy");
+        $("#TagsID").val("");
+        $("#TagsID").tagEditor({
+          delimiter: "",
+          forceLowercase: false,
+        });
+        $("#journalSelect").val("");
+        $("#metaTitleID").val("");
         console.log("Contact Details added successfully", data);
       })
       .catch((error) => {

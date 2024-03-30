@@ -71,7 +71,7 @@ var mainMenuLinks = [
    
     {
         title: "Contact Us",
-        link: "/contact-us",
+        link: "/editorialoffice",
         icon: "fa-regular fa-address-book",
         iconStyle: "font-size: 17px;margin-left:3px;margin-right:1px;"
     },

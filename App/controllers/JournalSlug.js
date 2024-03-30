@@ -56,6 +56,10 @@ const findJournalBySlugSubpage = async (req, res) => {
       res.render("MainProcessingFee", {
         journalDoc: JSON.stringify(JournalDoc._id),
       });
+    } else if (JournalDoc && subpage && subpage === "editorial-office") {
+      res.render("MainEditorialOffice", {
+        journalDoc: JSON.stringify(JournalDoc._id),
+      });
     } else if (JournalDoc) {
       res.render("index", { journalDoc: JSON.stringify(JournalDoc._id) });
     } else {

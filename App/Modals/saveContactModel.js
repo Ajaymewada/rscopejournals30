@@ -17,10 +17,14 @@ const savecontactSchema = new mongoose.Schema({
     metatitle: {
         type: String,
         required: true,
+    },
+    journalid: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Journal'
     }
 });
 
 // Create the AimAndScope model
-const Contactinfo = mongoose.model('Contactinfo', savecontactSchema);
+const Editorialoffice = mongoose.model('Editorialoffice', savecontactSchema);
 
-module.exports = Contactinfo;
+module.exports = Editorialoffice;

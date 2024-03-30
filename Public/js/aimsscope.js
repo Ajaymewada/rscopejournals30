@@ -57,6 +57,17 @@ $("#journalSelect").on("change", () => {
               initialTags: keywords,
             });
           }
+        } else {
+          aimscope.setValue(sourceID1, "");
+          description.setValue(sourceID2, "");
+          $("#TagsID").tagEditor("destroy");
+          $("#TagsID").val("");
+          $("#TagsID").tagEditor({
+            delimiter: "",
+            forceLowercase: false,
+          });
+          $("#journalSelect").val("");
+          $("#metaTitleID").val("");
         }
         console.log(data);
       });

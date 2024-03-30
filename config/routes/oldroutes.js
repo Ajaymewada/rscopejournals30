@@ -71,6 +71,9 @@ router.get('/submission-checklist', authMiddleware, function (req, res) {
 router.get('/peerreview', authMiddleware, function (req, res) {
     res.render('PeerReview');
 })
+router.get('/editorialoffice', authMiddleware, function (req, res) {
+    res.render('contactus');
+})
 router.get('/usefull-links', authMiddleware, function (req, res) {
     res.render('ForEditor');
 })
@@ -131,9 +134,12 @@ router.get('/in-press-management', authMiddleware, function (req, res) {
 //     res.render('MainProcessingFee');
 // })
 
-router.get('/editorial-office', function (req, res) {
-    res.render('MainContactUs');
-})
+// router.get('/editorial-office', function (req, res) {
+//     res.render('MainContactUs');
+// })
+// router.get('/editorialoffice', function (req, res) {
+//     res.render('contactus');
+// })
 
 // router.get('/why-submit?', function (req, res) {
 //     res.render('MainForEditors');
@@ -289,7 +295,7 @@ router.post("/getArticlesByIssueId", IssueController.getArticlesByIssueId);
 // Contact Us Routes
 router.post('/addContactInformation', contactUsController.savecontact);
 router.get('/getContactInformation', contactUsController.getsavecontact);
-
+router.get('/getEditorialOfficeByJournalId/:journalid', contactUsController.findEditorialOfficeByJournalId);
 // Submission ChecList routes
 router.post('/addsubmissionchecklist', submissionController.submissionCheckList);
 router.get('/getSubmissionCheckList', submissionController.getsaveSubmissionCheckList);
