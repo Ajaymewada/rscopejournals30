@@ -309,7 +309,7 @@
                   <div class="">
                     <ul class="form-feartures">
                       <li class="form-list">
-                        <div class="form-check mb-2">
+                        <div class="form-check mb-2" id="firstinput">
 
                           
 
@@ -402,7 +402,7 @@
                       <div class="form-select-wrapper mb-4">
                         <select
                           class="form-select"
-                          id="form-select"
+                          id="form-select-journals"
                           name="journals-list"
                         >
                           <option selected disabled value="">
@@ -419,7 +419,7 @@
                           Please select a department.
                         </div>
                       </div>
-                    </div>
+                      </div>
                     <div class="row gx-4">
                       <div class="col-md-12" id="additional-field"></div>
                     </div>
@@ -427,7 +427,7 @@
                     <div class="col-md-12">
                       <div class="form-floating mb-4">
                         <input
-                          id="form_name"
+                          id="form_subject"
                           type="text"
                           name="name"
                           class="form-control"
@@ -435,7 +435,7 @@
                           required
                           style="box-sizing: border-box"
                         />
-                        <label for="form_name">Enter your Subject *</label>
+                        <label for="form_subject">Enter your Subject *</label>
                         <div class="valid-feedback">Looks good!</div>
                         <div class="invalid-feedback">
                           Please enter your Title.
@@ -445,7 +445,7 @@
                     <div class="col-md-12">
                       <div class="form-floating mb-4">
                         <input
-                          id="form_name"
+                          id="form_fullname"
                           type="text"
                           name="name"
                           class="form-control"
@@ -453,7 +453,7 @@
                           required
                           style="box-sizing: border-box"
                         />
-                        <label for="form_name">Full Name *</label>
+                        <label for="form_fullname">Full Name *</label>
                         <div class="valid-feedback">Looks good!</div>
                         <div class="invalid-feedback">
                           Please enter your full name.
@@ -497,57 +497,10 @@
                       </div>
                     </div>
 
-                    <div class="col-lg-12 col-sm-12">
-                      <!-- <div class="col-lg-6">
-                        <script src="https://www.google.com/recaptcha/api.js"></script>
-                        <div class="form-group">
-                          <input
-                            class="form-floating d-none"
-                            data-recaptcha="true"
-                            required
-                          />
-                          <div
-                            class="g-recaptcha"
-                            data-sitekey="YOUR_SITE_KEY"
-                            data-callback="verifyRecaptchaCallback"
-                            data-expired-callback="expiredRecaptchaCallback"
-                          ></div>
-                          <div class="valid-feedback">Looks good!</div>
-                          <div class="invalid-feedback">
-                            Please complete the Captcha
-                          </div>
-                        </div>
-                      </div> -->
-
-                      <div class="col-lg-12">
-                        <div class="form-check mb-4">
-                          <input
-                            class="form-check-input"
-                            type="checkbox"
-                            value=""
-                            id="invalidCheck"
-                            required
-                            value
-                          />
-                          <label class="form-check-lable" for="invalidCheck">
-                            I agree to
-                            <a
-                              href="#"
-                              class="hover"
-                              style="text-decoration: underline"
-                              >terms and policy</a
-                            >.
-                          </label>
-                          <div class="invalid-feedback">
-                            You must agree before submitting.
-                          </div>
-                        </div>
-                      </div>
-                    </div>
 
                     <div class="col-md-12 mb-3 button">
                     <button type="submit"
-                    class="btn btn-primary rounded-pill btn-send mb-3 "><span> Send Message </span> </button>
+                    class="btn btn-primary rounded-pill btn-send mb-3" onclick="contactSendMail()"><span> Send Message </span> </button>
                     </div>
                   </div>
                 </form>
@@ -641,34 +594,13 @@
           });
         });
       </script>
-      <script>
-        $(document).ready(function () {
-          $('input[type="radio"][name="flexRadio"]').change(function () {
-            if (
-              $(this).is(":checked") &&
-              $(this).attr("id") === "flexRadioDefault1"
-            ) {
-              $("#additional-field").html(`
-                <div class="col-lg-12">
-                    <div class="form-floating mb-4">
-                        <input id="form_manuscript" type="text" name="manuscript" class="form-control" placeholder="Manuscript Name or Submission ID" required>
-                        <label for="form_manuscript">Manuscript Name  *</label>
-                        <div class="valid-feedback">
-                            Looks good!
-                        </div>
-                        <div class="invalid-feedback">
-                            Please enter the Manuscript Name or Submission ID.
-                        </div>
-                        
-                    </div>
-                </div>
-            `);
-            } else {
-              $("#additional-field").empty();
-            }
-          });
-        });
-      </script>
+          <script src="js/contactEmailjs"></script>
+
+          <script type="text/javascript">
+            (function () {
+                emailjs.init("GohktGuEB3CPDDXNB");
+            })();
+        </script>
    
 
 
