@@ -70,7 +70,7 @@ function getEditorialBoardByJournalId() {
             } else {
               interestElem = "NA"
             }
-            editorCard += `<div class="col-12 mb--10 sal-animate background mb-5" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
+            editorCard += `<div class="mb--10 sal-animate background mb-5" data-sal-delay="150" data-sal="slide-up" data-sal-duration="800">
             <div class="edu-team-grid team-style-1">
                 <div class="row align-items-center">
                     <!-- Image column for larger screens -->
@@ -91,7 +91,7 @@ function getEditorialBoardByJournalId() {
                                         <img style="height: 100%; border-radius: 50;" src="../${image}" class="img-fluid" alt="team images">
                                     </a>
                                 </div>
-                                <div class="ml-5 mar">
+                                <div class="ml-4 mar">
                                 <h5 class="title" title="${name}">${name}</h5>
                                 <h6 class="title">
                                     <a href="${website}" style="color:#ef7720;font-size:12px;" target="_blank">Website</a>
@@ -105,7 +105,8 @@ function getEditorialBoardByJournalId() {
                                 </div>
                             </div>
                             <div>
-                                <button type="button" class="btn bg-primarycolor text-white ml-5" onclick="openBiography('${editor._id}')" style="font-size: 10px; margin-top: 10px;border-radius:5px;">Biography</button>
+                                <button type="button" class="btn bg-primarycolor text-white ml-4
+                                " onclick="openBiography('${editor._id}')" style="font-size: 10px; margin-top: 10px;border-radius:5px;">Biography</button>
                             </div>
                             </div>
                         </div>

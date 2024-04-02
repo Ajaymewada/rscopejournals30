@@ -1920,8 +1920,8 @@ input[type="checkbox"]~label::before,
 input[type="radio"]~label::before {
     content: " ";
     position: absolute;
-    top: 4px;
-    left: 0;
+    top: 8px;
+    left: 10px;
     width: 17px;
     height: 17px;
     border: 1px solid #d2d5d6;
@@ -1968,8 +1968,8 @@ input[type="radio"]~label::after {
     content: "";
     height: 7px;
     width: 7px;
-    top: 9px;
-    left: 5px;
+    top: 13px;
+    left: 15px;
     background-color: var(--color-primary);
     border-radius: 50%
 }
@@ -8222,7 +8222,7 @@ only screen and (max-width:1199px) {
 }
 
 .contact-us-area {
-    padding: 120px 0 0
+    padding: 50px
 }
 
 @media only screen and (min-width:768px) and (max-width:991px) {
@@ -30276,6 +30276,7 @@ fa-user-tie:before {
         padding: 5px;
         margin-left: -20px;
     }
+    
 
     .shadow {
         width: 340px;
@@ -30283,3 +30284,8 @@ fa-user-tie:before {
         margin-left: -20px;
     }
 }
+
+
+
+/* check box///////////////////////// */
+

@@ -2691,7 +2691,7 @@ input[type="checkbox"]:checked ~ label::after {
   background-color: #f5f9fa;
   padding: 95px 0 85px;
   position: relative;
-  z-index: 1;
+  z-index: 100;
   overflow: hidden;
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -7899,7 +7899,7 @@ body.sal-disabled [data-sal|="flip"] {
 }
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   .contact-us-area {
-    padding: 100px 0 0;
+    padding: 10px 0 0;
   }
 }
 @media only screen and (max-width: 767px) {
