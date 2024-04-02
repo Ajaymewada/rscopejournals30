@@ -30,8 +30,14 @@ function getAllJournals() {
         let journalelem = "";
         if (Journals && Journals.length) {
           Journals.forEach((journal) => {
-            const { JournalName, MainCategory, ISSNNumber, ImpactFactorValue } =
+            const { JournalName, MainCategory, ISSNNumber, ImpactFactorValue, isActive} =
               journal;
+            let statuselem = "";  
+            if(isActive){
+              statuselem = `<span class="badge rounded-pill bg-success">Active</span>`
+            } else {
+              statuselem = `<span class="badge rounded-pill bg-danger">Inactive</span>`
+            }
             journalelem += `<tr>
                                 <td class="ps-0">
                                     <div class="d-flex align-items-center">
@@ -47,7 +53,7 @@ function getAllJournals() {
                                     <p class="mb-0 fs-3">${ISSNNumber}</p>
                                 </td>
                                 <td>
-                                    <p class="mb-0 fs-3">${ImpactFactorValue}</p>
+                                    <p class="mb-0 fs-3">${statuselem}</p>
                                 </td>
                                 <td>
                                     <span style="cursor: pointer;" class="badge fw-semibold p-2 bg-light-primary text-primary" onclick="showJournalModalPopup('${journal._id}')"><i class="fa-solid fa-pen-to-square"></i> Modify</span>

@@ -60,6 +60,14 @@ const findJournalBySlugSubpage = async (req, res) => {
       res.render("MainEditorialOffice", {
         journalDoc: JSON.stringify(JournalDoc._id),
       });
+    } else if (JournalDoc && subpage && subpage === "current-issue") {
+      res.render("mainCurrentIssue", {
+        journalDoc: JSON.stringify(JournalDoc._id),
+      });
+    } else if (JournalDoc && subpage && subpage === "all-issues") {
+      res.render("MainAllIssues", {
+        journalDoc: JSON.stringify(JournalDoc._id),
+      });
     } else if (JournalDoc) {
       res.render("index", { journalDoc: JSON.stringify(JournalDoc._id) });
     } else {
